@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const username = require('./models/user-model');
-const userModel = require('./models/user-model');
+const {userModel, validateModel} = require('./models/user-model');
 
 app.use(express.json());
 app.use(express.urlencoded({extented:true}));
@@ -11,11 +10,10 @@ app.get('/',function(req,res){
 })
 
 app.post("/create", async function(req,res){
-    let user = await userModel.create({
-        name:req.body.name
-    })
+    let {name, username, age, contact, email} = req.body;
 
-    res.send(user);
+    validateModel({name, username, age, contact, email});
+    res.send("check console");
 })
 
 app.listen(3000);
