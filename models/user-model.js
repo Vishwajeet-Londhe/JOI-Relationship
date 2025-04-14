@@ -38,7 +38,7 @@ function validateModel(data) {
     });
 
     let resolveans = schema.validate(data);
-    console.log(resolveans);
+    console.log(resolveans.error.message);
 }
 
 
