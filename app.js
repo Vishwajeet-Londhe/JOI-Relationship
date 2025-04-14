@@ -12,8 +12,10 @@ app.get('/',function(req,res){
 app.post("/create", async function(req,res){
     let {name, username, age, contact, email} = req.body;
 
-    validateModel({name, username, age, contact, email});
-    res.send("check console");
+    let error = validateModel({name, username, age, contact, email});
+    if(error) return res.status(500).send(error.message);
+
+    res.send("Every thing work good");
 })
 
 app.listen(3000);
