@@ -37,8 +37,8 @@ function validateModel(data) {
         contact: Joi.number().required()
     });
 
-    let resolveans = schema.validate(data);
-    console.log(resolveans.error.message);
+    let {error} = schema.validate(data);
+    return error;
 }
 
 
