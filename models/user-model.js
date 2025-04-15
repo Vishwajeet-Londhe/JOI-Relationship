@@ -87,7 +87,12 @@ function validateModel(data){
             'string.email': 'Please enter a valid email address',
             'any.required': 'Email is required'
           })
-      });    
+    });
+
+    let {error} = Schema.validate(data);
+    return error;
+
 }
 
-module.exports = mongoose.model("User",userSchema); 
+module.exports.userModel = mongoose.model("User",userSchema);
+module.exports.validateModel = validateModel;
