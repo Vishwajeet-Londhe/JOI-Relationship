@@ -81,7 +81,7 @@ function validateModel(data){
           }),
       
         email: Joi.string()
-          .email({ tlds: { allow: false } })
+          .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
           .required()
           .messages({
             'string.email': 'Please enter a valid email address',
