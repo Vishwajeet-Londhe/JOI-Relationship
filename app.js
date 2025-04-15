@@ -15,7 +15,10 @@ app.post("/create", async function(req,res){
     let error = validateModel({name, username, age, contact, email});
     if(error) return res.status(500).send(error.message);
 
-    res.send("Every thing work good");
+    let user = new userModel({name, username, age, contact, email});
+    await user.save();
+
+    res.send("Every thing work good and saved");
 })
 
 app.listen(3000);
