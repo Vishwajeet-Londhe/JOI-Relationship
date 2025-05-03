@@ -90,4 +90,9 @@ app.post("/:username/create/post", async (req, res) => {
     res.send({user, createdPost});
 })
 
+app.get("/posts", async function (req, res) {
+    let posts = await postModel.find().populate("user");
+    res.send(posts);
+})
+
 app.listen(3000);
