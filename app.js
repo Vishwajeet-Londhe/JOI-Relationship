@@ -95,4 +95,8 @@ app.get("/posts", async function (req, res) {
     res.send(posts);
 })
 
+app.get("/users", async function (req, res) {
+    let users = await userModel.find().populate("posts");
+    res.send(users);
+})
 app.listen(3000);
