@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
@@ -101,3 +102,27 @@ function validateModel(data) {
 
 module.exports.userModel = mongoose.model("User", userSchema);
 module.exports.validateModel = validateModel;
+*/
+
+// Relationship Introduction
+
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://127.0.0.1:27017/joi");
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    posts: [
+        {
+            content: String,
+            date: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ]
+})
+
+module.exports = mongoose.model("User", userSchema);

@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const app = express();
 const {userModel, validateModel} = require('./models/user-model');
@@ -20,5 +21,27 @@ app.post("/create", async function(req,res){
 
     res.send("Every thing work good and saved");
 })
+
+app.listen(3000);
+*/
+
+// Relationship Introduction
+
+const express = require('express');
+const app = express();
+const userModel = require("./models/user-model");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/create', async (req, res) => {
+    let createdUser = await userModel.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    res.send(createdUser);
+});
 
 app.listen(3000);
