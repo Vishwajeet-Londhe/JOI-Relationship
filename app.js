@@ -46,7 +46,7 @@ app.post('/create', async (req, res) => {
 
 app.post("/:username/create/post", async (req, res) => {
     let user = await userModel.findOne({ username: req.params.username });
-    user.posts.push({content: "ye mera post hai"});
+    user.posts.push({content: "ye mera dursa post hai"});
     await user.save();
     res.send(user);
 })
