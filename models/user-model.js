@@ -128,7 +128,9 @@ const userSchema = new mongoose.Schema({
 module.exports = mongoose.model("User", userSchema);
 */
 
-const mongoose = require('mongoose');
+
+// realtionship embedding
+/*const mongoose = require('mongoose');
 
 mongoose.connect("mongodb://127.0.0.1:27017/joi");
 
@@ -148,3 +150,19 @@ const userSchema = mongoose.Schema({
 })
 
 module.exports = mongoose.model("User", userSchema);
+*/
+
+//relationship referencing
+
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://127.0.0.1:27017/joi");
+
+const postSchema = mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    posts: [{type: mongoose.Schema.Types.ObjectId, ref: "Post"}]
+})
+
+module.exports = mongoose.model("User", postSchema);

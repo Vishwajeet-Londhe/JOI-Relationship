@@ -27,6 +27,8 @@ app.listen(3000);
 
 // Relationship Introduction
 
+// embedding
+/*
 const express = require('express');
 const app = express();
 const userModel = require("./models/user-model");
@@ -49,6 +51,43 @@ app.post("/:username/create/post", async (req, res) => {
     user.posts.push({content: "ye mera dursa post hai"});
     await user.save();
     res.send(user);
+})
+
+app.listen(3000);
+
+*/
+
+// referencing
+
+const express = require('express');
+const app = express();
+const userModel = require("./models/user-model");
+const postModel = require("./models/post-model");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/create', async (req, res) => {
+    let createdUser = await userModel.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    res.send(createdUser);
+});
+
+app.post("/:username/create/post", async (req, res) => {
+    let user = await userModel.findOne({ username: req.params.username });
+    
+    let createdPost = await postModel.create({
+        content: "ye mera ref ka post hai",
+        user: user._id
+    })
+
+    user.posts.push(createdPost._id);
+    await user.save();
+    res.send({user, createdPost});
 })
 
 app.listen(3000);
